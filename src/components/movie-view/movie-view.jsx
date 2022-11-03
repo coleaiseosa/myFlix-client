@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 export class MovieView extends React.Component {
   render() {
@@ -30,13 +31,13 @@ export class MovieView extends React.Component {
           <span className="value"> {movie.Director.Name} </span>
         </div>
 
-        <button
+        <Button
           onClick={() => {
             onBackClick(null);
           }}
         >
           Back
-        </button>
+        </Button>
       </div>
     );
   }
