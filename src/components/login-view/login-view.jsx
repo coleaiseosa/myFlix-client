@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import {
+  Form,
+  Button,
+  Container,
+  Card,
+  CardGroup,
+  Col,
+  Row,
+} from "react-bootstrap/";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -13,31 +22,48 @@ export function LoginView(props) {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
+    <Container>
+      <Row>
+        <Col>
+          <CardGroup>
+            <Card>
+              <Card.Title>Please Login</Card.Title>
+              <Card.Body>
+                <Form>
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      placeholder="Enter your Username"
+                    />
+                  </Form.Group>
 
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
+                  <Form.Group controlId="formPassword">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      minLength="5"
+                      placeholder="Please enter your password"
+                    />
+                  </Form.Group>
 
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-
-      <button type="button">Register</button>
-    </form>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
