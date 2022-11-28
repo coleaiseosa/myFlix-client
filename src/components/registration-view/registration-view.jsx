@@ -9,6 +9,10 @@ import {
   Col,
   Row,
 } from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+import "./registration-view.scss";
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
@@ -16,10 +20,67 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
+  // hook for each input
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+
+  //validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr("Username Required");
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr("Username must be 2 characters long");
+      isReq = false;
+    }
+
+    if (!password) {
+      setPasswordErr("Password Required");
+      isReq = false;
+    } else if (password.length < 5) {
+      setPassword("Password must be 5 characters long");
+      isReq = false;
+    }
+
+    if (!email) {
+      setEmailErr("Email Required");
+      isReq = false;
+    } else if (email.indexOf("@") === -1) {
+      setEmail("Please enter a  valid email address");
+      isReq = false;
+    }
+
+    return isReq;
+  };
+
+  // assign variable isReq to validate function
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.Registration(username);
+    const isReq = validate();
+    if (isReq) {
+      axios
+        .post("https://marcey-flix-movie-app.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Registration Successful, please login!");
+
+          window.open("/", "_self"); // _self is required so that the page will open in the current tab
+        })
+        // .catch((response) => {
+        //   console.error(response);
+        //   alert("unable to register");
+        .catch((e) => {
+          console.log("error registering user");
+        });
+    }
   };
 
   return (
@@ -28,7 +89,7 @@ export function RegistrationView(props) {
         <Col>
           <CardGroup>
             <Card>
-              <Card.Title>Please Resgister</Card.Title>
+              <Card.Title>Sign Up</Card.Title>
               <Card.Body>
                 <Form>
                   <Form.Group controlId="formUsername">
@@ -40,6 +101,8 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter a Username"
                     />
+
+                    {usernameErr && <p> {usernameErr} </p>}
                   </Form.Group>
 
                   <Form.Group controlId="formPassword">
@@ -52,6 +115,8 @@ export function RegistrationView(props) {
                       minLength="5"
                       placeholder="Your Password must be 5 characters or more"
                     />
+
+                    {passwordErr && <p> {passwordErr} </p>}
                   </Form.Group>
 
                   <Form.Group controlId="formEmail">
@@ -63,6 +128,8 @@ export function RegistrationView(props) {
                       required
                       placeholder="marcella@gmail.com"
                     />
+
+                    {emailErr && <p> {emailErr} </p>}
                   </Form.Group>
 
                   <Form.Group controlId="formBirthday">
@@ -83,6 +150,10 @@ export function RegistrationView(props) {
                   >
                     Register
                   </Button>
+                  <p></p>
+                  <p>
+                    Already registered <Link to={"/"}>Sign in</Link> here
+                  </p>
                 </Form>
               </Card.Body>
             </Card>
@@ -94,5 +165,10 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onRegistration: PropTypes.func.isRequired,
+  register: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+  }),
 };
