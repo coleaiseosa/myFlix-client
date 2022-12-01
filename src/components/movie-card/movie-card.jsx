@@ -10,7 +10,7 @@ export class MovieCard extends React.Component {
     const { movie } = this.props; // movie is the name of the prop i.e movie without curly brackets
     return (
       <Card>
-        <Card.Img variant="top" src={movie.ImagePath} crossorigin="anonymous" />
+        <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" />
         <Card.Body>
           <Card.Title> {movie.Title} </Card.Title>
           <Card.Text> {movie.Description} </Card.Text>
@@ -38,5 +38,5 @@ MovieCard.propTypes = {
       Bio: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  // onMovieClick: PropTypes.func.isRequired,
 };
