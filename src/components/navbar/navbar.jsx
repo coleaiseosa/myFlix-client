@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
 //export function for use in main-view
-export function Navbar({ user }) {
+export function Menubar({ user }) {
   // signout method
   const onLoggedOut = () => {
     localStorage.clear();

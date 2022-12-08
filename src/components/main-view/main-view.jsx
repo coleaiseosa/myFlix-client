@@ -10,7 +10,7 @@ import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { Navbar } from "../navbar/navbar";
+import { Menubar } from "../navbar/navbar";
 import ProfileView from "../profile-view/profile-view";
 
 // export makes the new component usable by others, the class indicates that the component is a class component and not a function while MainView is the new components name . extends React.component uses generic react component template and creates the MainView Component
@@ -82,7 +82,7 @@ export class MainView extends React.Component {
     //place Navbar after the router to enable it appear in all the views
     return (
       <Router>
-        <Navbar user={user} />
+        <Menubar user={user} />
         <Row className="main-view justify-content-md-center">
           <Route
             exact
