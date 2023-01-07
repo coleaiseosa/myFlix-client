@@ -1,0 +1,1 @@
+{"mappings":"AEEA","sources":["index.62aa44d4.css","src/components/registration-view/registration-view.scss","src/index.scss"],"sourcesContent":["\n\n.my-flix {\n  color: #4682b4;\n}\n\n/*# sourceMappingURL=index.62aa44d4.css.map */\n","","$color: steelblue;\n\n.my-flix {\n    color: $color;\n}"],"names":[],"version":3,"file":"index.62aa44d4.css.map"}
