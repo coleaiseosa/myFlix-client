@@ -42885,7 +42885,7 @@ class MovieCard extends _reactDefault.default.Component {
                 lineNumber: 16
             },
             __self: this
-        }, " ", movie.Description, " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+        }, " ", movie.Description.slice(0, 150) + "...", " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/movies/${movie._id}`,
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
